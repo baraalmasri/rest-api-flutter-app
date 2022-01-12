@@ -14,10 +14,7 @@ app.secret_key = 'jose'
 api = Api(app)
 
 class trend(Resource):
-    try:
-        pytrend = TrendReq()
-    except:
-        get_ipython().system('pip install pytube')
+    pytrend = TrendReq()
     
     def get(self, country):
         pytrends = TrendReq(hl='en-US', tz=360)
@@ -26,10 +23,9 @@ class trend(Resource):
 
 
 class top_trend(Resource):
-    try:
+ 
         pytrend = TrendReq()
-    except:
-        get_ipython().system('pip install pytrends --upgrade')
+ 
     
     def get(self):
          
@@ -40,10 +36,9 @@ class top_trend(Resource):
         return top_charts_df.head().to_json()
 
 class hot_trend(Resource):
-    try:
+ 
         pytrend = TrendReq()
-    except:
-        get_ipython().system('pip install pytrends --upgrade')
+ 
         
     def get(self):
          
