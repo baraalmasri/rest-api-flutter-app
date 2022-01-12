@@ -6,7 +6,7 @@ import json
 from pytrends.request import TrendReq
 
 
-
+pytrend = TrendReq()
 
 
 app = Flask(__name__)
@@ -16,6 +16,11 @@ app.secret_key = 'jose'
 api = Api(app)
 
 class trend(Resource):
+    try:
+        pytrend = TrendReq()
+    except:
+        get_ipython().system('pip install pytube')
+    
     def get(self, country):
         pytrends = TrendReq(hl='en-US', tz=360)
         data = pytrends.trending_searches(country)
@@ -23,8 +28,13 @@ class trend(Resource):
 
 
 class top_trend(Resource):
-    def get(self):
+    try:
         pytrend = TrendReq()
+    except:
+        get_ipython().system('pip install pytrends --upgrade')
+    
+    def get(self):
+         
         pytrend.build_payload(kw_list=[''])
 
         # Get Google Top Charts
@@ -32,8 +42,13 @@ class top_trend(Resource):
         return top_charts_df.head().to_json()
 
 class hot_trend(Resource):
-    def get(self):
+    try:
         pytrend = TrendReq()
+    except:
+        get_ipython().system('pip install pytrends --upgrade')
+        
+    def get(self):
+         
         pytrend.build_payload(kw_list=[''])
 
         # Get Google Hot Trends data
