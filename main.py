@@ -6,8 +6,6 @@ import json
 from pytrends.request import TrendReq
 
 
-pytrend = TrendReq()
-
 
 app = Flask(__name__)
 
